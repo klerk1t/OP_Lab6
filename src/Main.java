@@ -26,5 +26,8 @@ public class Main {
         }
         System.out.println(calculate);
 
+        ShuntingYard shuntingYard = new ShuntingYard(calculate);
+        shuntingYard.shuntingYard();
+
     }
 }
