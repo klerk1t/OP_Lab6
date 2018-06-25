@@ -1,0 +1,5 @@
+ab = 3;
+qw = 4;
+qwe = 32;
+qweqweqweqweq = 345;
+2 * ab + qw + qwe;

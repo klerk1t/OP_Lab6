@@ -1,38 +1,30 @@
 import java.io.*;
+import java.util.*;
 public class Main {
-    public static void main(String[] args) throws  IOException{
-        FileInputStream fileInputStream = new FileInputStream("res/input.txt");
-        int length = fileInputStream.available();
-        byte data[] = new byte[length];
+    public static void main(String[] args) throws IOException {
+        FileInputStream input = new FileInputStream("res/input.txt");
+        int length = input.available();
+        byte[] data = new byte[length];
+        input.read(data);
+        input.close();
 
-        fileInputStream.read(data);
-        fileInputStream.close();
+        Hashtable<String, Integer> map = new Hashtable<String, Integer>();
 
         String inputFile = new String(data);
-
-        String operation[] = inputFile.split(";");
-
-        int count = 0;
-
-        for(int i = 0; i < operation.length; i++) {
-            if(!operation[i].substring(0, 1).equals("S")) {
-                count++;
-            }
+        String operations[] = inputFile.split("\r\n");
+        String var[] = new String[operations.length - 1];
+        String calculate =
+                operations[operations.length - 1].substring(0, operations[operations.length - 1].indexOf(";"));
+        for(int i = 0; i < var.length; i++) {
+            var[i] = operations[i];
         }
-        String[] var = new String[count];
-        int hashTable[] = new int[count];
-
-        for(int i = 0; i < operation.length; i++) {
-            if(!operation[i].substring(0, 1).equals("S")) {
-                hashTable[i] = Integer.parseInt(operation[i].substring(operation[i].lastIndexOf(" ") + 1));
-                var[i] = operation[i].substring(0, operation[i].indexOf(" "));
-            }
+        for (String x : var) {
+            String key = x.substring(0, x.indexOf(" "));
+            int val = Integer.parseInt(x.substring(x.lastIndexOf(" ") + 1, x.indexOf(";")));
+            map.put(key, val);
+            System.out.println(key + "__" + map.get(key));
         }
-        for(String x : var)
-            System.out.println(x);
+        System.out.println(calculate);
 
-        for(int x : hashTable)
-            System.out.println(x);
-        //System.out.println(inputFile);
     }
 }
